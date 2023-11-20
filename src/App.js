@@ -2,8 +2,9 @@ import './App.css';
 import { useState } from "react"
 
 export default function App() {
-  const [newItem, setNewItem] = useState("")
-  const [todos,setTodos] = useState([])
+
+  const [newItem, setNewItem] = useState("");
+  const [todos,setTodos] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -11,17 +12,17 @@ export default function App() {
     setTodos(currentTodos => {
       return [
         ...currentTodos,{id: crypto.randomUUID(), title: newItem, completed: false}
-      ]
+      ];
     })
 
     // Change the input box back to empty string after adding an item    
-    setNewItem("")
+    setNewItem("");
   }
 
   function toggleTodo(id, completed){
     setTodos(currentTodos => {
       return currentTodos.map(todo => {
-        if (todo.id == id) {
+        if (todo.id === id) {
           return {...todo, completed}
         }
         return todo
@@ -31,7 +32,7 @@ export default function App() {
 
   function deleteTodo(id){
     setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
+      return currentTodos.filter(todo => todo.id !== id);
     })
   }
 
@@ -39,15 +40,15 @@ export default function App() {
     <>
       <form onSubmit = {handleSubmit} className = "new-item-form">
         <div className = "form-row">
-          <label htmlFor = "item">New Item</label>
+          <label htmlFor = "item">Do something today!</label>
         <input value = {newItem} 
         onChange = {e => setNewItem(e.target.value)} type = "text" id = "item" />
         </div>
         <button className= "btn">Add</button>
       </form>
-      <h1 className = "header">Todo List</h1>
+      <h1 className = "header">To Do List</h1>
       <ul className = "list">
-        {todos.length === 0 && "No todos"}
+        {todos.length === 0 && "No tasks"}
         {todos.map(todo => {
           return (<li key = {todo.id}>
           <label>
@@ -65,6 +66,3 @@ export default function App() {
 
   )
 };
-
-
-
